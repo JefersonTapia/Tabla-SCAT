@@ -2389,20 +2389,30 @@
     });
 </script>
 
-<button onclick="window.print()" 
-        style="background-color: #4CAF50; 
+<!-- BOTÓN CORREGIDO - USA ESTE -->
+<button onclick="imprimirPagina()" 
+        style="background-color: #28a745; 
                color: white; 
-               padding: 10px 20px; 
+               padding: 12px 24px; 
                border: none; 
                border-radius: 5px; 
                cursor: pointer;
+               font-size: 16px;
                margin: 10px;">
-    🖨️ Imprimir
+    🖨️ Imprimir Reporte SCAT
 </button>
+
+<script>
+function imprimirPagina() {
+    // Función simple y directa para imprimir
+    window.print();
+}
+</script>
 
 </div>
 </body>
 </html>
+
 
 
 
