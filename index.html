@@ -2389,29 +2389,107 @@
     });
 </script>
 
-<!-- BOTÓN CORREGIDO - USA ESTE -->
-<button onclick="imprimirPagina()" 
-        style="background-color: #28a745; 
-               color: white; 
-               padding: 12px 24px; 
-               border: none; 
-               border-radius: 5px; 
-               cursor: pointer;
-               font-size: 16px;
-               margin: 10px;">
-    🖨️ Imprimir Reporte SCAT
-</button>
+
+        
+<!-- BOTÓN PARA PDF - Agrega esto en tu página -->
+<div style="text-align: center; margin: 20px; padding: 10px;">
+    <button onclick="generarPDF()" 
+            style="background: linear-gradient(135deg, #667eea, #764ba2);
+                   color: white;
+                   padding: 15px 30px;
+                   border: none;
+                   border-radius: 25px;
+                   cursor: pointer;
+                   font-size: 18px;
+                   font-weight: bold;
+                   margin: 10px;">
+        📄 Descargar PDF SCAT
+    </button>
+    
+    <button onclick="capturarPantallaCompleta()" 
+            style="background: linear-gradient(135deg, #28a745, #20c997);
+                   color: white;
+                   padding: 15px 30px;
+                   border: none;
+                   border-radius: 25px;
+                   cursor: pointer;
+                   font-size: 18px;
+                   font-weight: bold;
+                   margin: 10px;">
+        📊 Capturar Tabla Completa
+    </button>
+</div>
+
+<!-- Agrega estas librerías en el <head> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
-function imprimirPagina() {
-    // Función simple y directa para imprimir
-    window.print();
+// Función para generar PDF de toda la página
+function generarPDF() {
+    // Mostrar mensaje de carga
+    alert('Generando PDF... Por favor espere.');
+    
+    // Capturar toda la página
+    const element = document.documentElement;
+    
+    const options = {
+        margin: [5, 5, 5, 5],
+        filename: 'Tabla_SCAT_Completa.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            scrollY: -window.scrollY,
+            width: document.documentElement.scrollWidth,
+            height: document.documentElement.scrollHeight
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait' 
+        }
+    };
+    
+    html2pdf().set(options).from(element).save();
+}
+
+// Función alternativa para capturar solo el contenido importante
+function capturarPantallaCompleta() {
+    alert('Capturando contenido SCAT...');
+    
+    // Intentar capturar la tabla o contenido principal
+    const contenido = document.querySelector('table') || document.querySelector('.container') || document.body;
+    
+    const options = {
+        margin: [10, 10, 10, 10],
+        filename: 'Datos_SCAT.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2,
+            useCORS: true
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'landscape'  // Horizontal para tablas anchas
+        }
+    };
+    
+    html2pdf().set(options).from(contenido).save();
+}
+
+// Función de emergencia si las anteriores fallan
+function descargarSimple() {
+    html2pdf().from(document.body).save('SCAT_Backup.pdf');
 }
 </script>
 
+        
 </div>
 </body>
 </html>
+
 
 
 
