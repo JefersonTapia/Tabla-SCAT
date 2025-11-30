@@ -2386,73 +2386,11 @@
         }
     });
 </script>
-
-
-        
-<!-- AGREGA ESTO EN TU HTML -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<style>
-    .btn-pdf-seguro {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        margin: 20px;
-        display: block;
-        width: 90%;
-        max-width: 300px;
-    }
-</style>
-
-<button class="btn-pdf-seguro" onclick="generarPDF_SCAT()">
-    💾 Descargar PDF SCAT
-</button>
-
-<script>
-function generarPDF_SCAT() {
-    // Mostrar mensaje de carga
-    alert('Generando PDF SCAT...');
-    
-    // Capturar el contenido completo
-    const element = document.documentElement;
-    
-    // Opciones del PDF
-    const options = {
-        margin: [5, 5, 5, 5],
-        filename: 'Reporte_SCAT_Completo.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2,
-            useCORS: true,
-            scrollY: -window.scrollY,
-            width: document.documentElement.scrollWidth,
-            height: document.documentElement.scrollHeight
-        },
-        jsPDF: { 
-            unit: 'mm', 
-            format: 'a4', 
-            orientation: 'portrait' 
-        }
-    };
-    
-    // Generar y descargar
-    html2pdf().set(options).from(element).save().then(() => {
-        console.log('PDF generado exitosamente');
-    }).catch(error => {
-        alert('Error al generar PDF: ' + error.message);
-    });
-}
-</script>
-
         
 </div>
 </body>
 </html>
+
 
 
 
